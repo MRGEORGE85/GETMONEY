@@ -7,320 +7,65 @@
     <meta name="theme-color" content="#183b56">
     <title>Check with Charles | Handyman Services</title>
     <style>
-        :root {
-            color-scheme: light;
-            --navy: #183b56;
-            --navy-deep: #102b40;
-            --orange: #d66b31;
-            --orange-dark: #b94f20;
-            --paper: #f7f5ef;
-            --white: #fff;
-            --ink: #26333b;
-            --muted: #64727a;
-            --line: #e3e5e2;
-            --radius: 8px;
-            --content-width: 1100px;
-        }
-        *, *::before, *::after { box-sizing: border-box; }
-        html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
-        body {
-            margin: 0;
-            color: var(--ink);
-            background: var(--white);
-            font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
-            line-height: 1.6;
-        }
-        a { color: inherit; }
-        button, input, select, textarea { font: inherit; }
-        .container { width: min(var(--content-width), calc(100% - 3rem)); margin-inline: auto; }
-        .skip-link { position: absolute; top: -4rem; left: 1rem; z-index: 20; padding: .6rem 1rem; background: var(--white); color: var(--navy); }
-        .skip-link:focus { top: 1rem; }
-        .site-header { position: sticky; top: 0; z-index: 10; background: var(--navy); color: var(--white); }
-        .nav { min-height: 70px; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-        .logo { color: var(--white); font-size: 1.2rem; font-weight: 750; text-decoration: none; white-space: nowrap; }
-        .logo span { color: #f2a06b; }
-        .nav-links { display: flex; align-items: center; gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
-        .nav-links a { color: var(--white); text-decoration: none; font-weight: 600; }
-        .nav-links a:hover, .nav-links a:focus-visible { color: #f2a06b; }
-        .nav-actions { display: flex; align-items: center; gap: .75rem; }
-        .menu-toggle { display: none; border: 1px solid rgba(255,255,255,.5); border-radius: 6px; padding: .45rem .7rem; color: var(--white); background: transparent; cursor: pointer; }
-        .button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: .5rem; padding: .7rem 1.1rem; border: 2px solid transparent; border-radius: 6px; text-decoration: none; font-weight: 700; cursor: pointer; transition: background-color .18s ease, color .18s ease, transform .18s ease; }
-        .button:hover { transform: translateY(-1px); }
-        .button-primary { background: var(--orange); color: var(--white); }
-        .button-primary:hover { background: var(--orange-dark); }
-        .button-outline { border-color: rgba(255,255,255,.75); color: var(--white); }
-        .button-outline:hover { background: rgba(255,255,255,.12); }
-        .nav .button { min-height: 40px; padding: .45rem .85rem; }
-        .hero { padding: clamp(4rem, 9vw, 7rem) 0; color: var(--white); background: var(--navy); }
-        .hero-inner { max-width: 760px; }
-        .eyebrow { margin: 0 0 .75rem; color: #f2a06b; font-size: .85rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
-        h1, h2, h3, p { margin-top: 0; }
-        .hero h1 { max-width: 700px; margin-bottom: 1rem; font-size: 4rem; line-height: 1.08; }
-        .hero-copy { max-width: 620px; margin-bottom: 1.7rem; color: rgba(255,255,255,.84); font-size: 1.15rem; }
-        .hero-actions { display: flex; flex-wrap: wrap; gap: .8rem; }
-        .trust-bar { padding: 1.15rem 0; background: var(--paper); border-bottom: 1px solid var(--line); }
-        .trust-items { display: flex; justify-content: space-between; gap: 1rem 2rem; flex-wrap: wrap; }
-        .trust-item { display: flex; align-items: center; gap: .65rem; color: var(--navy); font-weight: 700; }
-        .trust-mark { display: grid; width: 27px; height: 27px; place-items: center; border-radius: 50%; background: var(--orange); color: var(--white); font-size: .85rem; }
-        .section { padding: 4.5rem 0; }
-        .section-heading { max-width: 650px; margin: 0 auto 2.5rem; text-align: center; }
-        .section-heading h2, .about-copy h2 { margin-bottom: .6rem; color: var(--navy); font-size: 2rem; line-height: 1.2; }
-        .section-heading p, .muted { color: var(--muted); }
-        .service-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }
-        .service-card { padding: 1.5rem; border: 1px solid var(--line); border-top: 3px solid var(--orange); border-radius: var(--radius); background: var(--white); }
-        .service-card h3 { margin-bottom: .45rem; color: var(--navy); font-size: 1.15rem; }
-        .service-card p { margin-bottom: 0; color: var(--muted); }
-        .why-us { background: var(--paper); }
-        .feature-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.5rem; }
-        .feature-num { margin-bottom: .5rem; color: var(--orange); font-size: 1.75rem; font-weight: 800; }
-        .feature h3 { margin-bottom: .35rem; color: var(--navy); font-size: 1.05rem; }
-        .feature p { margin-bottom: 0; color: var(--muted); font-size: .95rem; }
-        .about-layout { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 3rem; }
-        .about-copy p { color: var(--muted); }
-        .about-note { min-height: 250px; display: grid; align-content: center; padding: 2rem; border-left: 6px solid var(--orange); background: var(--paper); color: var(--navy); }
-        .about-note strong { display: block; margin-bottom: .7rem; font-size: 1.7rem; line-height: 1.2; }
-        .contact { background: var(--navy); color: var(--white); }
-        .contact .section-heading h2 { color: var(--white); }
-        .contact .section-heading p { color: rgba(255,255,255,.78); }
-        .contact-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 3rem; align-items: start; }
-        .contact-info h3 { margin-bottom: 1.25rem; font-size: 1.3rem; }
-        .contact-detail { margin-bottom: 1.25rem; }
-        .contact-detail strong { display: block; color: #f2a06b; }
-        .contact-detail a { overflow-wrap: anywhere; text-underline-offset: .2em; }
-        .contact-form { padding: 1.5rem; border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius); background: rgba(255,255,255,.06); }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .form-group { margin-bottom: 1rem; }
-        .form-group label { display: block; margin-bottom: .35rem; font-weight: 650; }
-        .form-group input, .form-group select, .form-group textarea {
-            width: 100%; min-height: 46px; padding: .7rem .8rem; border: 1px solid rgba(255,255,255,.45); border-radius: 5px;
-            background: var(--white); color: var(--ink);
-        }
-        .form-group textarea { min-height: 120px; resize: vertical; }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: 3px solid #f2a06b; outline-offset: 2px; }
-        .form-hint { margin: .8rem 0 0; color: rgba(255,255,255,.72); font-size: .9rem; }
-        .form-status { min-height: 1.5em; margin: .75rem 0 0; color: #f8c19c; }
-        footer { padding: 2rem 0; background: var(--navy-deep); color: rgba(255,255,255,.75); text-align: center; }
-        footer p { margin-bottom: .3rem; }
-        footer a { color: #f2a06b; }
-        :focus-visible { outline: 3px solid #f2a06b; outline-offset: 3px; }
-        @media (max-width: 800px) {
-            .hero h1 { font-size: 2.8rem; }
-            .menu-toggle { display: inline-flex; }
-            .nav { position: relative; flex-wrap: wrap; padding-block: .7rem; }
-            .nav-actions { margin-left: auto; }
-            .nav-links { display: none; position: absolute; top: 100%; right: 0; left: 0; padding: .7rem 1.5rem 1rem; background: var(--navy); }
-            .nav-links.is-open { display: grid; gap: .2rem; }
-            .nav-links a { display: block; padding: .6rem 0; }
-            .service-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-            .about-layout, .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
-        }
-        @media (max-width: 520px) {
-            .hero h1 { font-size: 2.3rem; }
-            .container { width: min(var(--content-width), calc(100% - 2rem)); }
-            .nav .button { display: none; }
-            .hero { padding-block: 4rem; }
-            .hero-actions { align-items: stretch; flex-direction: column; }
-            .hero-actions .button { width: 100%; }
-            .trust-items { display: grid; }
-            .section { padding: 3.5rem 0; }
-            .service-grid, .feature-grid, .form-grid { grid-template-columns: 1fr; }
-            .contact-form { padding: 1rem; }
-        }
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
-        }
+        :root{color-scheme:light;--navy:#183b56;--navy-deep:#102b40;--orange:#d66b31;--orange-dark:#b94f20;--paper:#f7f5ef;--white:#fff;--ink:#26333b;--muted:#64727a;--line:#e3e5e2;--radius:8px;--content-width:1100px}
+        *,*::before,*::after{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:5rem}body{margin:0;color:var(--ink);background:var(--white);font-family:"Avenir Next",Avenir,"Segoe UI",sans-serif;line-height:1.6}a{color:inherit}button,input,select,textarea{font:inherit}.container{width:min(var(--content-width),calc(100% - 3rem));margin-inline:auto}
+        .skip-link{position:absolute;top:-4rem;left:1rem;z-index:20;padding:.6rem 1rem;background:var(--white);color:var(--navy)}.skip-link:focus{top:1rem}.site-header{position:sticky;top:0;z-index:10;background:var(--navy);color:var(--white)}.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:1rem}.logo{color:var(--white);font-size:1.2rem;font-weight:750;text-decoration:none;white-space:nowrap}.logo span{color:#f2a06b}.nav-links{display:flex;align-items:center;gap:1.5rem;margin:0;padding:0;list-style:none}.nav-links a{color:var(--white);text-decoration:none;font-weight:600}.nav-links a:hover,.nav-links a:focus-visible{color:#f2a06b}.nav-actions{display:flex;align-items:center;gap:.75rem}.menu-toggle{display:none;border:1px solid rgba(255,255,255,.5);border-radius:6px;padding:.45rem .7rem;color:var(--white);background:transparent;cursor:pointer}
+        .button{display:inline-flex;min-height:46px;align-items:center;justify-content:center;gap:.5rem;padding:.7rem 1.1rem;border:2px solid transparent;border-radius:6px;text-decoration:none;font-weight:700;cursor:pointer;transition:background-color .18s ease,color .18s ease,transform .18s ease}.button:hover{transform:translateY(-1px)}.button-primary{background:var(--orange);color:var(--white)}.button-primary:hover{background:var(--orange-dark)}.button-outline{border-color:rgba(255,255,255,.75);color:var(--white)}.button-outline:hover{background:rgba(255,255,255,.12)}.nav .button{min-height:40px;padding:.45rem .85rem}
+        .hero{padding:clamp(4rem,9vw,7rem) 0;color:var(--white);background:var(--navy)}.hero-inner{max-width:760px}.eyebrow{margin:0 0 .75rem;color:#f2a06b;font-size:.85rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}h1,h2,h3,p{margin-top:0}.hero h1{max-width:700px;margin-bottom:1rem;font-size:4rem;line-height:1.08}.hero-copy{max-width:620px;margin-bottom:1.7rem;color:rgba(255,255,255,.84);font-size:1.15rem}.hero-actions{display:flex;flex-wrap:wrap;gap:.8rem}
+        .trust-bar{padding:1.15rem 0;background:var(--paper);border-bottom:1px solid var(--line)}.trust-items{display:flex;justify-content:space-between;gap:1rem 2rem;flex-wrap:wrap}.trust-item{display:flex;align-items:center;gap:.65rem;color:var(--navy);font-weight:700}.trust-mark{display:grid;width:27px;height:27px;place-items:center;border-radius:50%;background:var(--orange);color:var(--white);font-size:.85rem}.section{padding:4.5rem 0}.section-heading{max-width:650px;margin:0 auto 2.5rem;text-align:center}.section-heading h2,.about-copy h2{margin-bottom:.6rem;color:var(--navy);font-size:2rem;line-height:1.2}.section-heading p,.muted{color:var(--muted)}
+        .service-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1rem}.service-card{padding:1.5rem;border:1px solid var(--line);border-top:3px solid var(--orange);border-radius:var(--radius);background:var(--white)}.service-card h3{margin-bottom:.45rem;color:var(--navy);font-size:1.15rem}.service-card p{margin-bottom:0;color:var(--muted)}.why-us{background:var(--paper)}.feature-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.5rem}.feature-num{margin-bottom:.5rem;color:var(--orange);font-size:1.75rem;font-weight:800}.feature h3{margin-bottom:.35rem;color:var(--navy);font-size:1.05rem}.feature p{margin-bottom:0;color:var(--muted);font-size:.95rem}
+        .about-layout{display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:3rem}.about-copy p{color:var(--muted)}.about-note{min-height:250px;display:grid;align-content:center;padding:2rem;border-left:6px solid var(--orange);background:var(--paper);color:var(--navy)}.about-note strong{display:block;margin-bottom:.7rem;font-size:1.7rem;line-height:1.2}.contact{background:var(--navy);color:var(--white)}.contact .section-heading h2{color:var(--white)}.contact .section-heading p{color:rgba(255,255,255,.78)}.contact-layout{display:grid;grid-template-columns:.85fr 1.15fr;gap:3rem;align-items:start}.contact-info h3{margin-bottom:1.25rem;font-size:1.3rem}.contact-detail{margin-bottom:1.25rem}.contact-detail strong{display:block;color:#f2a06b}.contact-detail a{overflow-wrap:anywhere;text-underline-offset:.2em}
+        .contact-form{padding:1.5rem;border:1px solid rgba(255,255,255,.2);border-radius:var(--radius);background:rgba(255,255,255,.06)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.form-group{margin-bottom:1rem}.form-group label{display:block;margin-bottom:.35rem;font-weight:650}.form-group input,.form-group select,.form-group textarea{width:100%;min-height:46px;padding:.7rem .8rem;border:1px solid rgba(255,255,255,.45);border-radius:5px;background:var(--white);color:var(--ink)}.form-group textarea{min-height:120px;resize:vertical}.form-group input:focus,.form-group select:focus,.form-group textarea:focus{outline:3px solid #f2a06b;outline-offset:2px}.form-hint{margin:.8rem 0 0;color:rgba(255,255,255,.78);font-size:.9rem}.form-status{min-height:1.5em;margin:.75rem 0 0;color:#f8c19c}.honeypot{position:absolute;left:-5000px}footer{padding:2rem 0;background:var(--navy-deep);color:rgba(255,255,255,.75);text-align:center}footer p{margin-bottom:.3rem}footer a{color:#f2a06b}:focus-visible{outline:3px solid #f2a06b;outline-offset:3px}
+        @media(max-width:800px){.hero h1{font-size:2.8rem}.menu-toggle{display:inline-flex}.nav{position:relative;flex-wrap:wrap;padding-block:.7rem}.nav-actions{margin-left:auto}.nav-links{display:none;position:absolute;top:100%;right:0;left:0;padding:.7rem 1.5rem 1rem;background:var(--navy)}.nav-links.is-open{display:grid;gap:.2rem}.nav-links a{display:block;padding:.6rem 0}.service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.feature-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.about-layout,.contact-layout{grid-template-columns:1fr;gap:2rem}}
+        @media(max-width:520px){.hero h1{font-size:2.3rem}.container{width:min(var(--content-width),calc(100% - 2rem))}.nav .button{display:none}.hero{padding-block:4rem}.hero-actions{align-items:stretch;flex-direction:column}.hero-actions .button{width:100%}.trust-items{display:grid}.section{padding:3.5rem 0}.service-grid,.feature-grid,.form-grid{grid-template-columns:1fr}.contact-form{padding:1rem}}
+        @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;transition-duration:.01ms!important}}
     </style>
 </head>
 <body>
     <a class="skip-link" href="#main">Skip to content</a>
-    <header class="site-header">
-        <nav class="container nav" aria-label="Main navigation">
-            <a class="logo" href="#top">Check with <span>Charles</span></a>
-            <ul class="nav-links" id="nav-links">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#why-us">Why Charles</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="nav-actions">
-                <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button>
-                <a class="button button-primary" href="#contact">Get a Quote</a>
-            </div>
-        </nav>
-    </header>
-
+    <header class="site-header"><nav class="container nav" aria-label="Main navigation">
+        <a class="logo" href="#top">Check with <span>Charles</span></a>
+        <ul class="nav-links" id="nav-links"><li><a href="#services">Services</a></li><li><a href="#why-us">Why Charles</a></li><li><a href="#about">About</a></li><li><a href="#contact">Contact</a></li></ul>
+        <div class="nav-actions"><button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links">Menu</button><a class="button button-primary" href="#contact">Get a Quote</a></div>
+    </nav></header>
     <main id="main">
-        <section class="hero" id="top">
-            <div class="container hero-inner">
-                <p class="eyebrow">Local handyman service</p>
-                <h1>Your home, fixed right.</h1>
-                <p class="hero-copy">Reliable help for repairs, maintenance, and home improvements. Clear communication, careful work, and fair quotes.</p>
-                <div class="hero-actions">
-                    <a class="button button-primary" href="#contact">Request a Free Quote</a>
-                    <a class="button button-outline" href="tel:+17073019861">Call (707) 301-9861</a>
-                    <a class="button button-outline" href="mailto:checkwithcharles85@gmail.com">Email Charles</a>
-                </div>
-            </div>
-        </section>
-
-        <div class="trust-bar" aria-label="Service highlights">
-            <div class="container trust-items">
-                <div class="trust-item"><span class="trust-mark" aria-hidden="true">&#10003;</span>Same-day service may be available</div>
-                <div class="trust-item"><span class="trust-mark" aria-hidden="true">&#9733;</span>Quality-focused work</div>
-                <div class="trust-item"><span class="trust-mark" aria-hidden="true">&#10003;</span>Upfront quotes</div>
-            </div>
-        </div>
-
-        <section class="section" id="services">
-            <div class="container">
-                <div class="section-heading">
-                    <p class="eyebrow">What I can help with</p>
-                    <h2>Home repairs and maintenance</h2>
-                    <p>From small fixes to larger projects, get dependable help around the house.</p>
-                </div>
-                <div class="service-grid">
-                    <article class="service-card"><h3>General Repairs</h3><p>Drywall, doors, windows, hardware, and everyday household fixes.</p></article>
-                    <article class="service-card"><h3>Plumbing</h3><p>Leaky faucets, clogged drains, toilet repairs, fixture installs, and minor pipe work.</p></article>
-                    <article class="service-card"><h3>Electrical</h3><p>Outlets, switches, lighting, ceiling fans, and basic troubleshooting.</p></article>
-                    <article class="service-card"><h3>Carpentry &amp; Woodwork</h3><p>Shelving, cabinets, trim, doors, and general woodwork.</p></article>
-                    <article class="service-card"><h3>Painting &amp; Finishing</h3><p>Interior and exterior painting, touch-ups, staining, and surface preparation.</p></article>
-                    <article class="service-card"><h3>Home Maintenance</h3><p>Weatherproofing, fixture installation, TV mounting, furniture assembly, and more.</p></article>
-                </div>
-            </div>
-        </section>
-
-        <section class="section why-us" id="why-us">
-            <div class="container">
-                <div class="section-heading">
-                    <p class="eyebrow">A straightforward experience</p>
-                    <h2>Why Check with Charles?</h2>
-                    <p>Respect for your home, your schedule, and your budget.</p>
-                </div>
-                <div class="feature-grid">
-                    <div class="feature"><div class="feature-num">01</div><h3>Skilled and experienced</h3><p>Hands-on experience with residential repairs and improvements.</p></div>
-                    <div class="feature"><div class="feature-num">02</div><h3>Transparent pricing</h3><p>Clear quotes before work begins, with no surprise fees.</p></div>
-                    <div class="feature"><div class="feature-num">03</div><h3>Reliable</h3><p>Timely communication and dependable appointments.</p></div>
-                    <div class="feature"><div class="feature-num">04</div><h3>Honest and fair</h3><p>Practical recommendations and straightforward service.</p></div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="about">
-            <div class="container about-layout">
-                <div class="about-copy">
-                    <p class="eyebrow">About the service</p>
-                    <h2>Make homeownership a little easier.</h2>
-                    <p class="muted">I'm a local handyman dedicated to helping homeowners keep their properties in good shape. Whether it's a quick fix or a larger project, I bring care and attention to every job.</p>
-                    <p class="muted">Tell me what needs attention and we'll discuss a practical next step and a clear quote.</p>
-                    <a class="button button-primary" href="#contact">Get Started</a>
-                </div>
-                <div class="about-note"><strong>Quality work.<br>Honest service.</strong><span>Serving Contra Costa and surrounding areas.</span></div>
-            </div>
-        </section>
-
-        <section class="section contact" id="contact">
-            <div class="container">
-                <div class="section-heading">
-                    <p class="eyebrow">Let's talk about your project</p>
-                    <h2>Request a free quote</h2>
-                    <p>Call, email, or fill out the form to prepare a quote request in your email app.</p>
-                </div>
-                <div class="contact-layout">
-                    <div class="contact-info">
-                        <h3>Contact Charles</h3>
-                        <div class="contact-detail"><strong>Phone</strong><a href="tel:+17073019861">(707) 301-9861</a></div>
-                        <div class="contact-detail"><strong>Email</strong><a href="mailto:checkwithcharles85@gmail.com">checkwithcharles85@gmail.com</a></div>
-                        <div class="contact-detail"><strong>Service area</strong>Contra Costa and surrounding areas</div>
-                        <div class="contact-detail"><strong>Hours</strong>Monday to Saturday, 7am to 7pm<br>Emergency calls welcome</div>
-                        <a class="button button-outline" href="mailto:checkwithcharles85@gmail.com">Email Charles</a>
-                    </div>
-                    <form class="contact-form" id="quote-form">
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="name">Your name</label>
-                                <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="phone">Phone</label>
-                                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" required>
-                            </div>
-                        </div>
-                        <div class="form-grid">
-                            <div class="form-group">
-                                <label for="email">Your email</label>
-                                <input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com">
-                            </div>
-                            <div class="form-group">
-                                <label for="service">Service needed</label>
-                                <select id="service" name="service">
-                                    <option value="">Choose a service</option>
-                                    <option>General repairs</option>
-                                    <option>Plumbing</option>
-                                    <option>Electrical</option>
-                                    <option>Carpentry and woodwork</option>
-                                    <option>Painting and finishing</option>
-                                    <option>Home maintenance</option>
-                                    <option>Other or multiple services</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Describe the job</label>
-                            <textarea id="message" name="message" placeholder="What needs to be done? Include the project location and a good time to reach you."></textarea>
-                        </div>
-                        <button class="button button-primary" type="submit">Prepare Email Request</button>
-                        <p class="form-hint">This opens your default email app with your request filled in. Nothing is sent automatically.</p>
-                        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-                    </form>
-                </div>
-            </div>
-        </section>
+        <section class="hero" id="top"><div class="container hero-inner"><p class="eyebrow">Local handyman service</p><h1>Your home, fixed right.</h1><p class="hero-copy">Reliable help for repairs, maintenance, and home improvements. Clear communication, careful work, and fair quotes.</p><div class="hero-actions"><a class="button button-primary" href="#contact">Request a Free Quote</a><a class="button button-outline" href="tel:+17073019861">Call (707) 301-9861</a><a class="button button-outline" href="mailto:checkwithcharles85@gmail.com">Email Charles</a></div></div></section>
+        <div class="trust-bar" aria-label="Service highlights"><div class="container trust-items"><div class="trust-item"><span class="trust-mark" aria-hidden="true">&#10003;</span>Same-day service may be available</div><div class="trust-item"><span class="trust-mark" aria-hidden="true">&#9733;</span>Quality-focused work</div><div class="trust-item"><span class="trust-mark" aria-hidden="true">&#10003;</span>Upfront quotes</div></div></div>
+        <section class="section" id="services"><div class="container"><div class="section-heading"><p class="eyebrow">What I can help with</p><h2>Home repairs and maintenance</h2><p>From small fixes to larger projects, get dependable help around the house.</p></div><div class="service-grid">
+            <article class="service-card"><h3>General Repairs</h3><p>Drywall, doors, windows, hardware, and everyday household fixes.</p></article><article class="service-card"><h3>Plumbing</h3><p>Leaky faucets, clogged drains, toilet repairs, fixture installs, and minor pipe work.</p></article><article class="service-card"><h3>Electrical</h3><p>Outlets, switches, lighting, ceiling fans, and basic troubleshooting.</p></article><article class="service-card"><h3>Carpentry &amp; Woodwork</h3><p>Shelving, cabinets, trim, doors, and general woodwork.</p></article><article class="service-card"><h3>Painting &amp; Finishing</h3><p>Interior and exterior painting, touch-ups, staining, and surface preparation.</p></article><article class="service-card"><h3>Home Maintenance</h3><p>Weatherproofing, fixture installation, TV mounting, furniture assembly, and more.</p></article>
+        </div></div></section>
+        <section class="section why-us" id="why-us"><div class="container"><div class="section-heading"><p class="eyebrow">A straightforward experience</p><h2>Why Check with Charles?</h2><p>Respect for your home, your schedule, and your budget.</p></div><div class="feature-grid">
+            <div class="feature"><div class="feature-num">01</div><h3>Skilled and experienced</h3><p>Hands-on experience with residential repairs and improvements.</p></div><div class="feature"><div class="feature-num">02</div><h3>Transparent pricing</h3><p>Clear quotes before work begins, with no surprise fees.</p></div><div class="feature"><div class="feature-num">03</div><h3>Reliable</h3><p>Timely communication and dependable appointments.</p></div><div class="feature"><div class="feature-num">04</div><h3>Honest and fair</h3><p>Practical recommendations and straightforward service.</p></div>
+        </div></div></section>
+        <section class="section" id="about"><div class="container about-layout"><div class="about-copy"><p class="eyebrow">About the service</p><h2>Make homeownership a little easier.</h2><p class="muted">I'm a local handyman dedicated to helping homeowners keep their properties in good shape. Whether it's a quick fix or a larger project, I bring care and attention to every job.</p><p class="muted">Tell me what needs attention and we'll discuss a practical next step and a clear quote.</p><a class="button button-primary" href="#contact">Get Started</a></div><div class="about-note"><strong>Quality work.<br>Honest service.</strong><span>Serving Contra Costa and surrounding areas.</span></div></div></section>
+        <section class="section contact" id="contact"><div class="container"><div class="section-heading"><p class="eyebrow">Let's talk about your project</p><h2>Request a free quote</h2><p>Call, email, or submit the form to send your quote request directly.</p></div><div class="contact-layout">
+            <div class="contact-info"><h3>Contact Charles</h3><div class="contact-detail"><strong>Phone</strong><a href="tel:+17073019861">(707) 301-9861</a></div><div class="contact-detail"><strong>Email</strong><a href="mailto:checkwithcharles85@gmail.com">checkwithcharles85@gmail.com</a></div><div class="contact-detail"><strong>Service area</strong>Contra Costa and surrounding areas</div><div class="contact-detail"><strong>Hours</strong>Monday to Saturday, 7am to 7pm<br>Emergency calls welcome</div><a class="button button-outline" href="mailto:checkwithcharles85@gmail.com">Email Charles</a></div>
+            <form class="contact-form" id="quote-form" action="https://formsubmit.co/checkwithcharles85@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New handyman quote request">
+                <input type="text" name="_honey" class="honeypot" tabindex="-1" autocomplete="off" aria-hidden="true">
+                <div class="form-grid"><div class="form-group"><label for="name">Your name</label><input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" required></div><div class="form-group"><label for="phone">Phone</label><input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="(555) 123-4567" required></div></div>
+                <div class="form-grid"><div class="form-group"><label for="email">Your email</label><input id="email" name="email" type="email" autocomplete="email" placeholder="you@example.com"></div><div class="form-group"><label for="service">Service needed</label><select id="service" name="service"><option value="">Choose a service</option><option>General repairs</option><option>Plumbing</option><option>Electrical</option><option>Carpentry and woodwork</option><option>Painting and finishing</option><option>Home maintenance</option><option>Other or multiple services</option></select></div></div>
+                <div class="form-group"><label for="message">Describe the job</label><textarea id="message" name="message" placeholder="What needs to be done? Include the project location and a good time to reach you."></textarea></div>
+                <button class="button button-primary" type="submit">Send Quote Request</button>
+                <p class="form-hint">Your request will be sent securely through FormSubmit to Charles's email. Please do not include sensitive information.</p>
+            </form>
+        </div></div></section>
     </main>
-
-    <footer>
-        <div class="container">
-            <p><strong>Check with Charles Handyman Service</strong></p>
-            <p>Professional. Reliable. Local.</p>
-            <p>&copy; <span id="year">2026</span> Check with Charles Handyman Service.</p>
-        </div>
-    </footer>
-
+    <footer><div class="container"><p><strong>Check with Charles Handyman Service</strong></p><p>Professional. Reliable. Local.</p><p>&copy; <span id="year">2026</span> Check with Charles Handyman Service.</p></div></footer>
     <script>
         const menuToggle = document.querySelector('.menu-toggle');
         const navLinks = document.querySelector('#nav-links');
-
         menuToggle.addEventListener('click', () => {
             const isOpen = menuToggle.getAttribute('aria-expanded') === 'true';
             menuToggle.setAttribute('aria-expanded', String(!isOpen));
             navLinks.classList.toggle('is-open', !isOpen);
         });
-
         navLinks.addEventListener('click', (event) => {
             if (event.target.closest('a')) {
                 menuToggle.setAttribute('aria-expanded', 'false');
                 navLinks.classList.remove('is-open');
             }
         });
-
-        document.querySelector('#quote-form').addEventListener('submit', (event) => {
-            event.preventDefault();
-            const formData = new FormData(event.currentTarget);
-            const details = [
-                `Name: ${formData.get('name')}`,
-                `Phone: ${formData.get('phone')}`,
-                `Email: ${formData.get('email') || 'Not provided'}`,
-                `Service: ${formData.get('service') || 'Not specified'}`,
-                '',
-                'Job details:',
-                formData.get('message') || 'No details provided.'
-            ].join('\n');
-            const subject = `Handyman quote request from ${formData.get('name')}`;
-            const mailto = `mailto:checkwithcharles85@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(details)}`;
-            document.querySelector('#form-status').textContent = 'Opening a new email draft. If nothing opens, use the Email Charles button or call (707) 301-9861.';
-            window.location.href = mailto;
-        });
-
         document.querySelector('#year').textContent = new Date().getFullYear();
     </script>
 </body>
