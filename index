@@ -4,16 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Check with Charles Handyman Service | Reliable Home Repairs</title>
-    <meta name="description" content="Professional handyman services for home repairs, maintenance, and improvements. Plumbing, electrical, carpentry, painting, and more. Fast, reliable, and affordable.">
+    <meta name="description" content="Professional handyman services for home repairs, maintenance, and improvements. Plumbing, electrical, carpentry, painting, and more. Fast, reliable, and affordable service.">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
             --primary: #1e3a5f;
+            --primary-dark: #152a45;
             --accent: #e67e22;
             --accent-hover: #d35400;
             --light: #f8f9fa;
@@ -23,6 +18,17 @@
             --white: #ffffff;
             --shadow: 0 4px 20px rgba(0,0,0,0.08);
             --radius: 12px;
+            --nav-height: 78px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
@@ -30,6 +36,37 @@
             color: var(--text);
             line-height: 1.6;
             background: var(--white);
+        }
+
+        img, svg {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            color: inherit;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+        }
+
+        :focus-visible {
+            outline: 3px solid rgba(230, 126, 34, 0.7);
+            outline-offset: 3px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+        }
+
+        section {
+            scroll-margin-top: calc(var(--nav-height) + 1rem);
         }
 
         /* Header */
@@ -43,22 +80,19 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.15);
         }
 
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 1.5rem;
-        }
-
         .nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            min-height: var(--nav-height);
+            position: relative;
         }
 
         .logo {
             font-size: 1.35rem;
             font-weight: 700;
             letter-spacing: -0.5px;
+            white-space: nowrap;
         }
 
         .logo span {
@@ -69,6 +103,7 @@
             display: flex;
             gap: 1.75rem;
             list-style: none;
+            align-items: center;
         }
 
         .nav-links a {
@@ -78,23 +113,89 @@
             transition: color 0.2s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a:focus-visible {
             color: var(--accent);
+        }
+
+        .cta-btn,
+        .btn-primary,
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
         }
 
         .cta-btn {
             background: var(--accent);
             color: var(--white);
             padding: 0.6rem 1.25rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.2s, transform 0.15s;
         }
 
-        .cta-btn:hover {
+        .cta-btn:hover,
+        .cta-btn:focus-visible,
+        .btn-primary:hover,
+        .btn-primary:focus-visible {
             background: var(--accent-hover);
             transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 2px solid rgba(255,255,255,0.4);
+            color: var(--white);
+            border-radius: 8px;
+            width: 46px;
+            height: 46px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-toggle span,
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            display: block;
+            position: relative;
+            width: 20px;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            content: "";
+            transition: all 0.2s ease;
+        }
+
+        .nav-toggle span::before {
+            position: absolute;
+            top: -6px;
+            left: 0;
+        }
+
+        .nav-toggle span::after {
+            position: absolute;
+            top: 6px;
+            left: 0;
+        }
+
+        .nav-toggle[aria-expanded="true"] span {
+            background: transparent;
+        }
+
+        .nav-toggle[aria-expanded="true"] span::before {
+            transform: rotate(45deg);
+            top: 0;
+        }
+
+        .nav-toggle[aria-expanded="true"] span::after {
+            transform: rotate(-45deg);
+            top: 0;
         }
 
         /* Hero */
@@ -143,34 +244,20 @@
             background: var(--accent);
             color: var(--white);
             padding: 0.9rem 1.75rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
-            transition: all 0.2s;
             border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            background: var(--accent-hover);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.35);
+            font-size: 1.05rem;
         }
 
         .btn-secondary {
             background: transparent;
             color: var(--white);
             padding: 0.9rem 1.75rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
             border: 2px solid rgba(255,255,255,0.6);
-            transition: all 0.2s;
+            font-size: 1.05rem;
         }
 
-        .btn-secondary:hover {
+        .btn-secondary:hover,
+        .btn-secondary:focus-visible {
             background: rgba(255,255,255,0.1);
             border-color: var(--white);
         }
@@ -202,9 +289,10 @@
             width: 24px;
             height: 24px;
             fill: var(--accent);
+            flex-shrink: 0;
         }
 
-        /* Services */
+        /* Sections */
         .section {
             padding: 5rem 0;
         }
@@ -274,7 +362,6 @@
             font-size: 0.95rem;
         }
 
-        /* Why Us */
         .why-us {
             background: var(--light);
         }
@@ -308,7 +395,6 @@
             font-size: 0.95rem;
         }
 
-        /* About */
         .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -426,6 +512,7 @@
             background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='white' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
             background-repeat: no-repeat;
             background-position: right 1rem center;
+            padding-right: 2.75rem;
         }
 
         .form-group select option {
@@ -433,9 +520,14 @@
             color: white;
         }
 
+        .contact-form .btn-primary {
+            width: 100%;
+            border: none;
+        }
+
         /* Footer */
         footer {
-            background: #152a45;
+            background: var(--primary-dark);
             color: rgba(255,255,255,0.7);
             padding: 2.5rem 0;
             text-align: center;
@@ -452,7 +544,28 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .nav {
+                flex-wrap: wrap;
+            }
+
+            .nav-toggle {
+                display: inline-flex;
+            }
+
             .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.9rem;
+                padding: 1rem 0 0.25rem;
+            }
+
+            .nav-links.is-open {
+                display: flex;
+            }
+
+            .nav .cta-btn {
                 display: none;
             }
 
@@ -477,233 +590,245 @@
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="container nav">
-            <div class="logo">Check with <span>Charles</span></div>
-            <ul class="nav-links">
-                <li><a href="#services">Services</a></li>
-                <li><a href="#why-us">Why Us</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="logo" aria-label="Check with Charles home">Check with <span>Charles</span></div>
+
+            <button class="nav-toggle" type="button" aria-label="Toggle navigation menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+            </button>
+
+            <nav aria-label="Main navigation">
+                <ul class="nav-links" id="primary-nav">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#why-us">Why Us</a></li>
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+
             <a href="#contact" class="cta-btn">Get a Quote</a>
         </div>
     </header>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <h1>Your Home, Fixed Right.</h1>
-            <p>Professional handyman services for repairs, maintenance, and improvements. Fast response, quality work, fair prices.</p>
-            <div class="hero-buttons">
-                <a href="#contact" class="btn-primary">Request a Free Quote</a>
-                <a href="tel:+17076414417" class="btn-secondary">Call Now: (707) 641-4417</a>
+    <main>
+        <section class="hero" aria-labelledby="hero-title">
+            <div class="container">
+                <h1 id="hero-title">Your Home, Fixed Right.</h1>
+                <p>Professional handyman services for repairs, maintenance, and improvements. Fast response, quality work, fair prices.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn-primary">Request a Free Quote</a>
+                    <a href="tel:+17076414417" class="btn-secondary">Call Now: (707) 641-4417</a>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Trust Bar -->
-    <div class="trust-bar">
-        <div class="container trust-items">
-            <div class="trust-item">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                Same-Day Service Available
-            </div>
-            <div class="trust-item">
-                <svg viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-                5-Star Rated
-            </div>
-            <div class="trust-item">
-                <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
-                Satisfaction Guaranteed
-            </div>
-        </div>
-    </div>
-
-    <!-- Services -->
-    <section class="section" id="services">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Services</h2>
-                <p>From small fixes to bigger projects — I handle it all with skill and care.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-                    </div>
-                    <h3>General Repairs</h3>
-                    <p>Drywall, doors, windows, hardware, and everyday household fixes done right the first time.</p>
+        <div class="trust-bar" aria-label="Business highlights">
+            <div class="container trust-items">
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.25-4.5-2.65V7z"/></svg>
+                    Same-Day Service Available
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/><path d="M12 6v6l4 2"/></svg>
-                    </div>
-                    <h3>Plumbing</h3>
-                    <p>Leaky faucets, clogged drains, toilet repairs, fixture installs, and minor pipe work.</p>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    5-Star Rated
                 </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
-                    </div>
-                    <h3>Electrical</h3>
-                    <p>Outlets, switches, lighting installs, ceiling fans, and basic troubleshooting.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                    </div>
-                    <h3>Carpentry & Woodwork</h3>
-                    <p>Shelving, cabinets, trim, doors, and general woodwork.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24"><path d="M18 4V3c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V6h1v4H9v11c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-9h8V4h-3z"/></svg>
-                    </div>
-                    <h3>Painting & Finishing</h3>
-                    <p>Interior and exterior painting, touch-ups, staining, and surface prep for a clean finish.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                    </div>
-                    <h3>Home Maintenance</h3>
-                    <p>Seasonal check-ups, weatherproofing, fixtures, mounting TVs, furniture assembly, and more.</p>
+                <div class="trust-item">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg>
+                    Satisfaction Guaranteed
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Why Us -->
-    <section class="section why-us" id="why-us">
-        <div class="container">
-            <div class="section-title">
-                <h2>Why Choose Check with Charles?</h2>
-                <p>I treat your home like my own — with honesty, skill, and respect for your time.</p>
-            </div>
-            <div class="features">
-                <div class="feature">
-                    <div class="feature-num">01</div>
-                    <h3>Skilled & Experienced</h3>
-                    <p>Years of hands-on experience across residential repairs and improvements.</p>
+        <section class="section" id="services" aria-labelledby="services-title">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="services-title">Our Services</h2>
+                    <p>From small fixes to bigger projects — I handle it all with skill and care.</p>
                 </div>
-                <div class="feature">
-                    <div class="feature-num">02</div>
-                    <h3>Transparent Pricing</h3>
-                    <p>Clear quotes upfront. No surprise fees or hidden costs.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-num">03</div>
-                    <h3>On-Time & Reliable</h3>
-                    <p>I show up when I say I will and finish the job properly.</p>
-                </div>
-                <div class="feature">
-                    <div class="feature-num">04</div>
-                    <h3>Honest & Fair</h3>
-                    <p>Straightforward communication and pricing you can trust.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+                <div class="services-grid">
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.4-.4.4-1 0-1.4zM3 7.5C3 6.1 4.1 5 5.5 5S8 6.1 8 7.5 6.9 10 5.5 10 3 8.9 3 7.5zm15.2 9.2l-2.1 2.1-4.6-4.6 2.1-2.1 4.6 4.6z"/></svg>
+                        </div>
+                        <h3>General Repairs</h3>
+                        <p>Drywall, doors, windows, hardware, and everyday household fixes done right the first time.</p>
+                    </article>
 
-    <!-- About -->
-    <section class="section" id="about">
-        <div class="container about-content">
-            <div class="about-text">
-                <h2>About Check with Charles</h2>
-                <p>I'm a local handyman dedicated to helping homeowners keep their properties in top shape. Whether it's a quick fix or a multi-day project, I bring the same attention to detail and professional attitude every time.</p>
-                <p>My goal is simple: make home ownership easier. You focus on living in your home — I'll take care of the repairs, maintenance, and upgrades that keep it running smoothly.</p>
-                <a href="#contact" class="btn-primary" style="display: inline-block; margin-top: 0.5rem;">Get Started Today</a>
-            </div>
-            <div class="about-image">
-                <div>
-                    <strong style="font-size: 1.4rem; display: block; margin-bottom: 0.5rem;">Quality Work.<br>Honest Service.</strong>
-                    Serving the local community with pride.
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg>
+                        </div>
+                        <h3>Plumbing</h3>
+                        <p>Leaky faucets, clogged drains, toilet repairs, fixture installs, and minor pipe work.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M7 2v11h3v9l7-12h-4l4-8z"/></svg>
+                        </div>
+                        <h3>Electrical</h3>
+                        <p>Outlets, switches, lighting installs, ceiling fans, and basic troubleshooting.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        </div>
+                        <h3>Carpentry &amp; Woodwork</h3>
+                        <p>Shelving, cabinets, trim, doors, and general woodwork.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M18 4V3c0-.55-.45-1-1-1H5c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h12c.55 0 1-.45 1-1V6h1v4H9v11c0 .55.45 1 1 1h2c.55 0 1-.45 1-1v-9h8V4h-3z"/></svg>
+                        </div>
+                        <h3>Painting &amp; Finishing</h3>
+                        <p>Interior and exterior painting, touch-ups, staining, and surface prep for a clean finish.</p>
+                    </article>
+
+                    <article class="service-card">
+                        <div class="service-icon" aria-hidden="true">
+                            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        </div>
+                        <h3>Home Maintenance</h3>
+                        <p>Seasonal check-ups, weatherproofing, fixtures, mounting TVs, furniture assembly, and more.</p>
+                    </article>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contact -->
-    <section class="section contact" id="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Get Your Free Quote</h2>
-                <p>Tell me what you need help with and I'll get back to you quickly.</p>
+        <section class="section why-us" id="why-us" aria-labelledby="why-us-title">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="why-us-title">Why Choose Check with Charles?</h2>
+                    <p>I treat your home like my own — with honesty, skill, and respect for your time.</p>
+                </div>
+                <div class="features">
+                    <article class="feature">
+                        <div class="feature-num">01</div>
+                        <h3>Skilled &amp; Experienced</h3>
+                        <p>Years of hands-on experience across residential repairs and improvements.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-num">02</div>
+                        <h3>Transparent Pricing</h3>
+                        <p>Clear quotes upfront. No surprise fees or hidden costs.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-num">03</div>
+                        <h3>On-Time &amp; Reliable</h3>
+                        <p>I show up when I say I will and finish the job properly.</p>
+                    </article>
+                    <article class="feature">
+                        <div class="feature-num">04</div>
+                        <h3>Honest &amp; Fair</h3>
+                        <p>Straightforward communication and pricing you can trust.</p>
+                    </article>
+                </div>
             </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <h3>Contact Details</h3>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-                        <div>
-                            <strong>Phone</strong><br>
-                            <a href="tel:+17076414417" style="color: inherit; text-decoration: none;">(707) 641-4417</a>
+        </section>
+
+        <section class="section" id="about" aria-labelledby="about-title">
+            <div class="container about-content">
+                <div class="about-text">
+                    <h2 id="about-title">About Check with Charles</h2>
+                    <p>I'm a local handyman dedicated to helping homeowners keep their properties in top shape. Whether it's a quick fix or a multi-day project, I bring the same attention to detail and professionalism to every job.</p>
+                    <p>My goal is simple: make home ownership easier. You focus on living in your home — I'll take care of the repairs, maintenance, and upgrades that keep it running smoothly.</p>
+                    <a href="#contact" class="btn-primary" style="display: inline-block; margin-top: 0.5rem;">Get Started Today</a>
+                </div>
+                <div class="about-image" aria-label="Quality work and honest service">
+                    <div>
+                        <strong style="font-size: 1.4rem; display: block; margin-bottom: 0.5rem;">Quality Work.<br>Honest Service.</strong>
+                        Serving the local community with pride.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section contact" id="contact" aria-labelledby="contact-title">
+            <div class="container">
+                <div class="section-title">
+                    <h2 id="contact-title">Get Your Free Quote</h2>
+                    <p>Tell me what you need help with and I'll get back to you quickly.</p>
+                </div>
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h3>Contact Details</h3>
+
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.12.35.03.74-.24 1.02l-2.2 2.2z"/></svg>
+                            <div>
+                                <strong>Phone</strong><br>
+                                <a href="tel:+17076414417" style="color: inherit; text-decoration: none;">(707) 641-4417</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            <div>
+                                <strong>Email</strong><br>
+                                <a href="mailto:checkwithcharles85@gmail.com" style="color: inherit; text-decoration: none;">checkwithcharles85@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <div>
+                                <strong>Service Area</strong><br>
+                                Contra Costa and surrounding areas
+                            </div>
+                        </div>
+
+                        <div class="contact-item">
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13h-1v6l5.25 3.15.75-1.25-4.5-2.65V7z"/></svg>
+                            <div>
+                                <strong>Hours</strong><br>
+                                Mon–Sat: 7am – 7pm<br>
+                                Emergency calls welcome
+                            </div>
                         </div>
                     </div>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-                        <div>
-                            <strong>Email</strong><br>
-                            <a href="mailto:checkwithcharles85@gmail.com" style="color: inherit; text-decoration: none;">checkwithcharles85@gmail.com</a>
-                        </div>
+
+                    <div class="contact-form">
+                        <form action="https://formspree.io/f/mwllyyqj" method="POST">
+                            <div class="form-group">
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" name="name" placeholder="John Smith" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input type="email" id="email" name="email" placeholder="you@email.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="service">Service Needed</label>
+                                <select id="service" name="service">
+                                    <option value="">Select a service...</option>
+                                    <option value="General Repairs">General Repairs</option>
+                                    <option value="Plumbing">Plumbing</option>
+                                    <option value="Electrical">Electrical</option>
+                                    <option value="Carpentry">Carpentry</option>
+                                    <option value="Painting">Painting</option>
+                                    <option value="Home Maintenance">Home Maintenance</option>
+                                    <option value="Other / Multiple">Other / Multiple</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Describe the job</label>
+                                <textarea id="message" name="message" placeholder="Briefly tell us what needs to be done..."></textarea>
+                            </div>
+                            <button type="submit" class="btn-primary">Send Request</button>
+                        </form>
                     </div>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-                        <div>
-                            <strong>Service Area</strong><br>
-                            Contra Costa and surrounding areas
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
-                        <div>
-                            <strong>Hours</strong><br>
-                            Mon–Sat: 7am – 7pm<br>
-                            Emergency calls welcome
-                        </div>
-                    </div>
-                </div>
-                <div class="contact-form">
-                    <form action="https://formspree.io/f/mwllyyqj" method="POST">
-                        <div class="form-group">
-                            <label for="name">Your Name</label>
-                            <input type="text" id="name" name="name" placeholder="John Smith" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="you@email.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="service">Service Needed</label>
-                            <select id="service" name="service">
-                                <option value="">Select a service...</option>
-                                <option>General Repairs</option>
-                                <option>Plumbing</option>
-                                <option>Electrical</option>
-                                <option>Carpentry</option>
-                                <option>Painting</option>
-                                <option>Home Maintenance</option>
-                                <option>Other / Multiple</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Describe the job</label>
-                            <textarea id="message" name="message" placeholder="Briefly tell us what needs to be done..."></textarea>
-                        </div>
-                        <button type="submit" class="btn-primary" style="width: 100%;">Send Request</button>
-                    </form>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer>
         <div class="container">
             <p><strong>Check with Charles Handyman Service</strong></p>
@@ -711,5 +836,24 @@
             <p style="margin-top: 1rem; font-size: 0.9rem;">&copy; 2026 Check with Charles Handyman Service. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.getElementById('primary-nav');
+
+        if (navToggle && navLinks) {
+            navToggle.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('is-open');
+                navToggle.setAttribute('aria-expanded', String(isOpen));
+            });
+
+            navLinks.querySelectorAll('a').forEach((link) => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('is-open');
+                    navToggle.setAttribute('aria-expanded', 'false');
+                });
+            });
+        }
+    </script>
 </body>
 </html>
